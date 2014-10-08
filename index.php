@@ -5,4 +5,4 @@ require 'application/configs/autoloader.php';
 
 echo 'hola!';
 
- 
+$app = new Application();

@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteBase /projects/velomania-parser/
+
+#RewriteRule .* index.php
