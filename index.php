@@ -3,6 +3,9 @@
 require 'application/configs/config.php';
 require 'application/configs/autoloader.php';
 
-echo 'hola!';
+if (file_exists('vendor/autoload.php')) {
+    require 'vendor/autoload.php';
+}
+
 
 $app = new Application();

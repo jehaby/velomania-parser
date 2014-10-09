@@ -1,0 +1,13 @@
+{
+    "name": "jehaby/velomania-parser",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "author's name",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+        "raveren/kint": "v0.9.1"
+    }
+}

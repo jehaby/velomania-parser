@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-define('URL', 'http://localhost/php-login/');
+define('URL', 'http://localhost/projects/velomania-parser');
 
 define('DBTYPE', 'sqlite:db.db');
 
