@@ -7,5 +7,4 @@ if (file_exists('vendor/autoload.php')) {
     require 'vendor/autoload.php';
 }
 
-
 $app = new Application();

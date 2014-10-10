@@ -24,6 +24,19 @@ class Controller {
         $this->view = new View();
     }
 
+    public function loadModel($name) {
+        $path = MODELS_PATH . $name . 'Model.php';
+
+        if (file_exists($path)) {
+            require $path;
+            // The "Model" has a capital letter as this is the second part of the model class name,
+            // all models have names like "LoginModel"
+            $modelName = $name . 'Model';
+            // return the new model object while passing the database connection to the model
+            return new $modelName();
+        }
+    }
+
     public function login() {
 
     }
