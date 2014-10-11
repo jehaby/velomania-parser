@@ -1,7 +1,15 @@
 CREATE TABLE User (
   user_id INTEGER PRIMARY KEY,
-  username TEXT NOT NULL,
-  password TEXT NOT NULL
+  user_name TEXT NOT NULL,
+  user_email TEXT NOT NULL,
+  user_password TEXT NOT NULL,
+  user_rememberme_token TEXT,
+  user_creation_timestamp INT,
+  user_last_login_timestamp INT,
+  user_failed_logins INT,
+  user_last_failed_login INT,
+  user_password_reset_hash TEXT,
+  user_password_reset_timestamp INT
 );
 
 CREATE TABLE Pattern (

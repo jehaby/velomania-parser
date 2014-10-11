@@ -1,20 +1,13 @@
 <?php
 
 
-class Model extends PDO {
+class Model {
 
     protected $db;
 
     public function __construct() {
-        $this->db = parent::__construct(DBTYPE);
+        $this->db = new PDO(DBTYPE);
     }
 
-    public function login() {
-
-    }
-
-    public function logout() {
-
-    }
 
 } 

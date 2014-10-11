@@ -92,8 +92,7 @@ class Application {
             $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
             $this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
         }
-
-        d($this);
+//        d($this);
     }
 
 } 

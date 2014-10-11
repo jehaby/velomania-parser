@@ -8,9 +8,9 @@ class Controller {
         Session::init();
 
         // user has remember-me-cookie ? then try to login with cookie ("remember me" feature)
-        if (!isset($_SESSION['user_logged_in']) && isset($_COOKIE['rememberme'])) {
-            header('location: ' . URL . 'login/loginWithCookie');
-        }
+//        if (!isset($_SESSION['user_logged_in']) && isset($_COOKIE['rememberme'])) {
+//            header('location: ' . URL . 'login/loginWithCookie');
+//        }
 
 //        jehaby-notes: why database connection in controller. Try no do it in model.
 //        // create database connection
@@ -37,12 +37,5 @@ class Controller {
         }
     }
 
-    public function login() {
-
-    }
-
-    public function logout() {
-
-    }
 
 } 

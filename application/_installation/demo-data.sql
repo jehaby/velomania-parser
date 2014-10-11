@@ -1,4 +1,4 @@
-INSERT INTO "User" VALUES(1,'urf','7e169b8d621f031e58ee5f5f7dca1401');
+INSERT INTO User(user_id, user_name, user_email, user_password) VALUES (1,'urf', 'kevin.smth.42@gmail.com','7e169b8d621f031e58ee5f5f7dca1401');
 
 INSERT INTO "Pattern" VALUES(1,'рюкзак');
 INSERT INTO "Pattern" VALUES(2,'нож');
