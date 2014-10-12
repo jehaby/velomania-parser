@@ -16,8 +16,22 @@ class PatternsModel extends Model{
 
     }
 
-    public function add() {
+    public function add($themes_model) {
+        if (!isset($_POST['new_pattern'])) {
+            echo 'wtf';
+            return false;
+        }
+        $themes_model->newPatternInSections();
+        //
+        d($_POST);
+        d($_SESSION);
 
+
+        $sql = "INSERT INTO Pattern (pattern) VALUES (:pattern)";
+        $query = $this->db->prepare($sql);
+        $query->execute([':pattern' => $_POST['new_pattern']]);
+
+        return true;
     }
 
 

@@ -7,7 +7,7 @@
         echo sprintf("<p><a href='%slogin/logout'>Выйти</a> </p>", URL);
     } else {
         echo "<p> You have to <a href='" . URL ."login'>log in</a> or " .
-            "<a href='" . URL . "register'>register</a> to use this site. </p>";
+            "<a href='" . URL . "login/register'>register</a> to use this site. </p>";
     }
     ?>
     <p>-------------------------</p>
