@@ -17,6 +17,7 @@ $sections = Pattern::getSectionsMapping();
                 echo '<tr >';
                 echo "<td> <a href='". URL . "themes/show/$pattern->pattern_id'>$pattern->pattern</a> </td>";
                 ?>
+                <td> <?=$pattern->sectionsAsWords()?> </td>
                 <td>
                     <form action="<?=URL?>patterns/delete" method="POST">
                         <input type="hidden" name="patter_id_for_deletion" value="<?=$pattern->pattern_id?>">
@@ -31,8 +32,6 @@ $sections = Pattern::getSectionsMapping();
         }
         ?>
     </table>
-
-
 
     <form action="<?=URL . 'patterns/add'?>" method="POST">
         <input type="text" name="new_pattern" required /><br>
