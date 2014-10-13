@@ -14,7 +14,8 @@ CREATE TABLE User (
 
 CREATE TABLE Pattern (
   pattern_id INTEGER PRIMARY KEY,
-  pattern TEXT NOT NULL
+  pattern TEXT NOT NULL,
+  sections TEXT NOT NULL
 );
 
 CREATE TABLE UserPattern (
