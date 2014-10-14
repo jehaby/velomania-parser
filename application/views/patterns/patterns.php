@@ -20,7 +20,7 @@ $sections = Pattern::getSectionsMapping();
                 <td> <?=$pattern->sectionsAsWords()?> </td>
                 <td>
                     <form action="<?=URL?>patterns/delete" method="POST">
-                        <input type="hidden" name="patter_id_for_deletion" value="<?=$pattern->pattern_id?>">
+                        <input type="hidden" name="pattern_id_for_deletion" value="<?=$pattern->pattern_id?>">
                         <input type="submit" content="Удалить" name = 'x' value="x">
                     </form>
                 </td>

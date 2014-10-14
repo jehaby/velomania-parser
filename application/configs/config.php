@@ -51,5 +51,6 @@ define("FEEDBACK_ACCOUNT_SUCCESSFULLY_CREATED", "Your account has been created s
 define("FEEDBACK_WRONG_SECRET_CODE", "You entered wrong secret code");
 define('FEEDBACK_PASSWORD_WRONG', 'Wrong username or password');
 
-
+define('FEEDBACK_PATTERN_NO_PATTERN_OR_SECTIONS', 'You have to choose at least one section');
+define('FEEDBACK_PATTERN_USER_ALREADY_HAS_PATTERN', 'You already have this pattern with same sections');
 

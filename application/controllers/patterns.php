@@ -22,13 +22,13 @@ class Patterns extends Controller {
         $patterns_model = $this->loadModel('Patterns');
         $themes_model = $this->loadModel("Themes");
         $patterns_model->add($themes_model);
-
-        $this->view->patterns = $patterns_model->getListOfPatterns();
-        $this->view->render('patterns/patterns');
+        header('location: ' . URL . 'patterns');
     }
 
     public function delete() {
-
+        $patterns_model = $this->loadModel('Patterns');
+        $patterns_model->delete();
+        header('location: ' . URL . 'patterns');
     }
 
 } 

@@ -14,7 +14,23 @@ class PatternsModel extends Model
     }
 
     public function delete() {
+        if (!isset($_POST['pattern_id_for_deletion'])) {
+            d($_POST);
+            $_SESSION['feedback_negative'][] = 'wtf';
+            return;
+        }
+        $pattern_id = $_POST['pattern_id_for_deletion'];
 
+        $sql = 'SELECT user_id FROM UserPattern WHERE pattern_id = :pattern_id';
+        $query = $this->db->prepare($sql);
+        $query->execute([':pattern_id' => $pattern_id]);
+        $res = $query->fetchAll(PDO::FETCH_COLUMN);
+
+        if (count($res) === 1) {  // if only current user has this pattern
+            $this->db->exec("DELETE FROM Pattern WHERE pattern_id = {$pattern_id}");
+        }
+
+        $this->db->exec("DELETE FROM UserPattern WHERE pattern_id = {$pattern_id} AND user_id = {$_SESSION['user_id']}");
     }
 
     private function patternExists($pattern, $sections)
@@ -31,7 +47,8 @@ class PatternsModel extends Model
     public function add($themes_model)
     {
         if (!isset($_POST['new_pattern']) || !isset($_POST['sections']) ) {
-            throw new Exception("'new_pattern' and 'sections' must be set!");
+            $_SESSION['feedback_negative'][] = FEEDBACK_PATTERN_NO_PATTERN_OR_SECTIONS;
+            return;
         }
 
         $new_pattern = $_POST['new_pattern'];
@@ -39,35 +56,28 @@ class PatternsModel extends Model
         $sections = implode(' ', $_POST['sections']);
 
         if (!$existing_pattern = $this->patternExists($new_pattern, $sections)) {
-            $themes_model->newPatternInSections();
-            $sql = "INSERT INTO ";
 
+            $themes_model->newPatternInSections();
+
+            $sql = 'INSERT INTO Pattern(pattern, sections) VALUES (:pattern, :sections);';
+            $query = $this->db->prepare($sql);
+            $query->execute([':pattern' => $new_pattern, ':sections' => $sections]);
+
+            $pattern_id = (int) $this->db->lastInsertId();
+            $this->db->exec("INSERT INTO UserPattern(user_id, pattern_id) VALUES ({$_SESSION['user_id']}, {$pattern_id})");
 
         } else {
             // check if current user has this pattern
             $sql = "SELECT * FROM UserPattern
                 WHERE pattern_id = {$existing_pattern->pattern_id} AND user_id = {$_SESSION['user_id']}";
-            if ($this->db->exec($sql)->fetch()) {
-                // finishepta
+            if ($this->db->query($sql)) {
+                $_SESSION['feedback_negative'][] = FEEDBACK_PATTERN_USER_ALREADY_HAS_PATTERN;
+                return;
             }
-            $sql = "";
 
-
+            $this->db->exec("INSERT INTO UserPattern(user_id, pattern_id) " .
+                " VALUES ({$_SESSION['user_id']}, {$existing_pattern->pattern_id})");
         }
-
-
-
-        //
-        $new_pattern = $_POST['new_pattern'];
-
-
-
-
-        $sql = "INSERT INTO Pattern (pattern) VALUES (:pattern)";
-        $query = $this->db->prepare($sql);
-        $query->execute([':pattern' => $_POST['new_pattern']]);
-
-        return true;
     }
 
 
