@@ -37,7 +37,9 @@ CREATE TABLE PatternTheme (
 );
 
 CREATE TABLE UselessTheme (
-theme_id INTEGER PRIMARY KEY
+theme_id INTEGER NOT NULL,
+pattern_id INTEGER NOT NULL,
+PRIMARY KEY(theme_id, pattern_id)
 );
 
 CREATE TABLE PatternCheckedTheme (

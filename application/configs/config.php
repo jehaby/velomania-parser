@@ -19,7 +19,7 @@ define('SECRET_CODE', 'green');
  */
 define('URL', 'http://localhost/projects/velomania-parser/');
 
-define('DBTYPE', 'sqlite:/opt/lampp/htdocs/projects/velomania-parser/db.db');  // TODO: do it better
+define('DBTYPE', 'sqlite:/opt/lampp/htdocs/projects/velomania-parser/public/db/db.db');  // TODO: do it better
 
 define('LIBS_PATH', 'application/libs/');
 define('CONTROLLER_PATH', 'application/controllers/');

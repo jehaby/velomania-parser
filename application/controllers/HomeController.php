@@ -17,6 +17,8 @@ class HomeController extends Controller {
      */
     function index()
     {
+        $db = new PDO(DBTYPE);
+        d($db->query('SELECT * FROM Pattern;')->fetchAll());
         $this->view->render('index/index');
     }
 }
