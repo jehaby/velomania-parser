@@ -15,7 +15,13 @@ class Themes extends Controller {
 
         $themes_model = $this->loadModel('Themes');
         $this->view->themes = $themes_model->getThemes($pattern_id);
-        $this->view->render('themes/themes.php');
+        $this->view->render('themes/themes');
+    }
+
+    public function test() {
+        $themes_model = $this->loadModel('Themes');
+        //$themes_model->checkSection(1, 73, True);
+        $themes_model->checkAllPatterns();
     }
 
 

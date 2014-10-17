@@ -41,9 +41,3 @@ theme_id INTEGER NOT NULL,
 pattern_id INTEGER NOT NULL,
 PRIMARY KEY(theme_id, pattern_id)
 );
-
-CREATE TABLE PatternCheckedTheme (
-theme_id INTEGER NOT NULL,  -- need't be a foreign key
-pattern_id INTEGER REFERENCES Pattern(pattern_id),
-PRIMARY KEY(theme_id, pattern_id)
-);
