@@ -147,6 +147,7 @@ class ThemesModel extends Model
         }
 
         $this->addThemes($pattern->pattern_id, $themes_with_pattern);
+        Mailer::sendMail($_SESSION['user_email'], $_SESSION['username'], $pattern, $themes_with_pattern);
 
         // TODO: mail $themes_with_pattern
         $this->addUselessThemes($themes_without_pattern);

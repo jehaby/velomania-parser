@@ -24,5 +24,9 @@ class Themes extends Controller {
         $themes_model->checkAllPatterns();
     }
 
+    public function testmail() {
+        Mailer::sendMail(1, 1, 1, 1);
+    }
+
 
 } 
