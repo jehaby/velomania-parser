@@ -14,7 +14,7 @@ $sections = Pattern::getSectionsMapping();
         <?php
         if ($this->patterns) {
             foreach($this->patterns as $pattern) {
-                echo '<tr >';
+                echo '<tr>';
                 echo "<td> <a href='". URL . "themes/show/$pattern->pattern_id'>$pattern->pattern</a> </td>";
                 ?>
                 <td> <?=$pattern->sectionsAsWords()?> </td>
@@ -42,5 +42,4 @@ $sections = Pattern::getSectionsMapping();
         <input type="submit" value="Добавить паттерн"/>
     </form>
 
-    <?php d($this->patterns); ?>
 </div>

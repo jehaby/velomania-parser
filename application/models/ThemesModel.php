@@ -26,9 +26,11 @@ class ThemesModel extends Model
         }
     }
 
-    public function newPatternInSections()
+    public function newPatternInSections($pattern)
     {
-
+        foreach (explode(' ', $pattern->sections) as $section) {
+            $this->checkSection($pattern->pattern, $section);
+        }
     }
 
     private function getCheckedThemes($pattern_id)
@@ -49,10 +51,7 @@ class ThemesModel extends Model
 
     private function addThemes($pattern_id, $themes)
     {
-        if (count($themes) < 1)
-            return;
-
-        $sql = 'INSERT INTO PatternTheme(pattern_id, theme_id) VALUES(:pattern_id, :theme_id);';
+        $sql = 'INSERT INTO PatternTheme(pattern_id, theme_id) VALUES (:pattern_id, :theme_id);';
         $query1 = $this->db->prepare($sql);
 
         $sql = 'INSERT INTO Theme(theme_id, title, author) VALUES (:theme_id, :title, :author)';
@@ -146,8 +145,10 @@ class ThemesModel extends Model
             $days_from_last_message = (new DateTime())->diff(DateTime:: createFromFormat("d.m.Y", $last_date))->d;
         }
 
-        $this->addThemes($pattern->pattern_id, $themes_with_pattern);
-        Mailer::sendMail($_SESSION['user_email'], $_SESSION['username'], $pattern, $themes_with_pattern);
+        if ($themes_with_pattern) {
+            $this->addThemes($pattern->pattern_id, $themes_with_pattern);
+            Mailer::sendMail($_SESSION['user_email'], $_SESSION['username'], $pattern, $themes_with_pattern);
+        }
 
         // TODO: mail $themes_with_pattern
         $this->addUselessThemes($themes_without_pattern);

@@ -8,12 +8,8 @@ class Mailer
     public static function sendMail($email, $username, $pattern, $themes)
     {
         $mail = new PHPMailer();
-
         $mail->IsSMTP();
-
-        d(self::makeBody($username, $pattern, $themes));
-        exit;
-
+//        d(self::makeBody($username, $pattern, $themes));
         $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
         $mail->SMTPAuth = true; // authentication enabled
         $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
@@ -35,7 +31,7 @@ class Mailer
 
     private static function makeBody($username, $pattern, $themes)
     {
-
+        d($themes);
         $res = '<body>';
         $res .= '<p> Hello, ' . $username . '</p>';
         $res .= '<p> Есть новые темы для паттерна: ' . $pattern->pattern . '</p>';
