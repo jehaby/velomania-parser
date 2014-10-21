@@ -14,6 +14,7 @@ class PatternsModel extends Model
     }
 
     public function delete() {
+        // TODO: bug here! Pattern_Theme! Fixed?
         if (!isset($_POST['pattern_id_for_deletion'])) {
             d($_POST);
             $_SESSION['feedback_negative'][] = 'wtf';
@@ -27,7 +28,8 @@ class PatternsModel extends Model
         $res = $query->fetchAll(PDO::FETCH_COLUMN);
 
         if (count($res) === 1) {  // if only current user has this pattern
-            $this->db->exec("DELETE FROM Pattern WHERE pattern_id = {$pattern_id}");
+            $this->db->exec("DELETE FROM Pattern WHERE pattern_id = {$pattern_id};");
+            $this->db->exec("DELETE FROM PatternTheme WHERE pattern_id = {$pattern_id};");
         }
 
         $this->db->exec("DELETE FROM UserPattern WHERE pattern_id = {$pattern_id} AND user_id = {$_SESSION['user_id']}");

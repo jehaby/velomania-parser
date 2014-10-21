@@ -32,7 +32,7 @@ class Pattern {
     }
 
     public function __construct($pattern_id, $pattern, $sections) {
-        $this->pattern_id = $pattern_id;
+        $this->pattern_id = (int) $pattern_id;
         $this->pattern = $pattern;
 
         // should be at least one number in section string!

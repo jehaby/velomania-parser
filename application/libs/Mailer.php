@@ -4,12 +4,12 @@
 class Mailer
 {
 
-
-    public static function sendMail($email, $username, $pattern, $themes)
+    public static function sendMail(array $emails, Pattern $pattern, array $themes)
     {
+
         $mail = new PHPMailer();
+        $mail->CharSet = 'UTF-8';
         $mail->IsSMTP();
-//        d(self::makeBody($username, $pattern, $themes));
         $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
         $mail->SMTPAuth = true; // authentication enabled
         $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
@@ -19,9 +19,12 @@ class Mailer
         $mail->Username = GMAIL_USERNAME;
         $mail->Password = GMAIL_PASSWORD;
         $mail->SetFrom("velomaniaparser@gmail.com");
-        $mail->Subject = 'Новые темы для паттерна -- ' . $pattern;
-        $mail->Body = self::makeBody($username, $pattern, $themes);
-        $mail->AddAddress($email);
+        $mail->Subject = 'Новые темы для паттерна -- ' . $pattern->pattern;
+        $mail->Body = self::makeBody($pattern, $themes);
+
+        foreach ($emails as $email) {
+            $mail->AddAddress($email);
+        }
         if (!$mail->Send()) {
             echo "Mailer Error: " . $mail->ErrorInfo;
         } else {
@@ -29,11 +32,10 @@ class Mailer
         }
     }
 
-    private static function makeBody($username, $pattern, $themes)
+    private static function makeBody(Pattern $pattern, array $themes)
     {
-        d($themes);
         $res = '<body>';
-        $res .= '<p> Hello, ' . $username . '</p>';
+        $res .= '<p> Привет! </p>';
         $res .= '<p> Есть новые темы для паттерна: ' . $pattern->pattern . '</p>';
         $res .= "<ul> \n";
         foreach ($themes as $theme) {

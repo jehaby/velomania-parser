@@ -1,7 +1,8 @@
 <?php
 
 
-class LoginModel extends Model{
+class LoginModel extends Model
+{
 
 
     public function login()
@@ -134,7 +135,8 @@ class LoginModel extends Model{
         Session::destroy();
     }
 
-    public function register() {
+    public function register()
+    {
         if (empty($_POST['user_name'])) {
             $_SESSION["feedback_negative"][] = FEEDBACK_USERNAME_FIELD_EMPTY;
         } elseif (empty($_POST['user_password_new']) OR empty($_POST['user_password_repeat'])) {
@@ -227,9 +229,6 @@ class LoginModel extends Model{
         }
 // default return, returns only true of really successful (see above)
         return false;
-    }
-    private function password_verify($p1, $p1) {
-        return true;
     }
 
 } 

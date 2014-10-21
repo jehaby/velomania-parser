@@ -18,6 +18,8 @@ class ThemesModel extends Model
         $all_patterns = $this->db->query("SELECT pattern_id, pattern, sections FROM Pattern")
             ->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Pattern', ['', '', 1]) ;
 
+        d($all_patterns);
+
         foreach ($all_patterns as $pattern) {
             $sections = explode(' ', $pattern->sections);
             foreach ($sections as $section) {
@@ -29,7 +31,7 @@ class ThemesModel extends Model
     public function newPatternInSections($pattern)
     {
         foreach (explode(' ', $pattern->sections) as $section) {
-            $this->checkSection($pattern->pattern, $section);
+            $this->checkSection($pattern, $section);
         }
     }
 
@@ -145,13 +147,23 @@ class ThemesModel extends Model
             $days_from_last_message = (new DateTime())->diff(DateTime:: createFromFormat("d.m.Y", $last_date))->d;
         }
 
+        $emails = isset($_SESSION['user_email']) ? [$_SESSION['user_email']] : $this->getEmailsByPattern($pattern->pattern_id);
+
         if ($themes_with_pattern) {
+            Mailer::sendMail($emails, $pattern, $themes_with_pattern);
             $this->addThemes($pattern->pattern_id, $themes_with_pattern);
-            Mailer::sendMail($_SESSION['user_email'], $_SESSION['username'], $pattern, $themes_with_pattern);
         }
 
-        // TODO: mail $themes_with_pattern
         $this->addUselessThemes($themes_without_pattern);
+    }
+
+    private function getEmailsByPattern($pattern_id) {
+        $pattern_id = (int) $pattern_id;  // TODO: this sucks
+        $sql = "SELECT user_email FROM User JOIN UserPattern USING (user_id) WHERE pattern_id = {$pattern_id} ;";
+        d($sql);
+        $res = $this->db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        if (!$res) throw new Exception('wtf');
+        return $res;
     }
 
 } 
