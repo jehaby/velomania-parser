@@ -8,7 +8,8 @@ ini_set("display_errors", 1);
 define('COOKIE_RUNTIME', 1209600);
 // the domain where the cookie is valid for, for local development ".127.0.0.1" and ".localhost" will work
 // IMPORTANT: always put a dot in front of the domain, like ".mydomain.com" !
-define('COOKIE_DOMAIN', '.localhost');
+//define('COOKIE_DOMAIN', '.urf.duckdns.org');
+define('COOKIE_DOMAIN', '.192.168.0.102');
 
 define('SECRET_CODE', 'green');
 /**
@@ -17,9 +18,9 @@ define('SECRET_CODE', 'green');
  * if you are using a (different) port, then put this in here, like http://mydomain:8888/subfolder/
  * Note: The trailing slash is important!
  */
-define('URL', 'http://localhost/projects/velomania-parser/');
+define('URL', 'http://192.168.0.102/velomania-parser/');
 
-define('DBTYPE', 'sqlite:/opt/lampp/htdocs/projects/velomania-parser/public/db/db.db');  // TODO: do it better
+define('DBTYPE', 'sqlite:public/db/db.db');  // TODO: do it better
 
 define('LIBS_PATH', 'application/libs/');
 define('CONTROLLER_PATH', 'application/controllers/');
