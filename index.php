@@ -13,6 +13,5 @@ if (file_exists('vendor/autoload.php')) {
     require 'vendor/autoload.php';
 }
 
-d($_SERVER);
 
 $app = new Application();
