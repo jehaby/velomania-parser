@@ -57,15 +57,10 @@ class PatternsModel extends Model
         sort($_POST['sections']);
         $sections = implode(' ', $_POST['sections']);
 
-//        d($this->patternExists($new_pattern, $sections));
-
         if (!$existing_pattern = $this->patternExists($new_pattern, $sections)) {
 
             $sql = 'INSERT INTO Pattern(pattern, sections) VALUES (:pattern, :sections);';
             $query = $this->db->prepare($sql);
-            d($query->execute([':pattern' => $new_pattern, ':sections' => $sections]));
-
-            echo 'sadfsadf';
 
             $pattern_id = (int) $this->db->lastInsertId();
             $this->db->exec("INSERT INTO UserPattern(user_id, pattern_id) VALUES ({$_SESSION['user_id']}, {$pattern_id})");
