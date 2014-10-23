@@ -18,8 +18,6 @@ class ThemesModel extends Model
         $all_patterns = $this->db->query("SELECT pattern_id, pattern, sections FROM Pattern")
             ->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Pattern', ['', '', 1]) ;
 
-        d($all_patterns);
-
         foreach ($all_patterns as $pattern) {
             $sections = explode(' ', $pattern->sections);
             foreach ($sections as $section) {
